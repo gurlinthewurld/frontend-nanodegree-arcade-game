@@ -4,6 +4,7 @@ var tileHeight = 83;
 
 // Enemies our player must avoid
 var Enemy = function(x,y,speed) {
+    //from jshint: speed y x
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     /* I will add x, y and speed
@@ -42,6 +43,7 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 
 var Player = function(x,y,speed) {
+    //from jshint: speed y x
     //Enemy.call(this, x, y);
     this.x = 2 * tileWidth;
     this.y = 5 * tileHeight;
@@ -50,6 +52,7 @@ var Player = function(x,y,speed) {
 //Player.prototype = Object.create(Enemy.prototype);
 //Player.prototype.constructor = Player;
 Player.prototype.update = function(dt) {
+//from jshint: dt
     this.checkCollisions();
     this.win();
 };
@@ -61,8 +64,8 @@ Player.prototype.handleInput = function(e) {
     var keyOK = (typeof e !== 'undefined');
     console.log(e);
 
-    var xInBound = (this.x >= 0 && this.x <=(tileWidth * 4));
-    var yInBound = (this.y >= 0 && this.y <=(tileHeight * 5));
+    var xInBound = (this.x >= 0 && this.x <=(tileWidth * 5));
+    var yInBound = (this.y >= 0 && this.y <=(tileHeight * 6));
 
     if (keyOK && xInBound && yInBound) {
       if (e == 'right' && this.x < (tileWidth * 4)){
@@ -89,10 +92,11 @@ Player.prototype.checkCollisions = function( ) {
 };
 
 Player.prototype.win = function() {
-    if (this.y == 0) {
+    if (this.y === 0) {
       // what is the difference between == and ===
+      // from http://jshint.com "Use '===' to compare with '0'."
         this.reset();
-        alert("You made it!");
+        alert("Awesomeness!");
 
     }
 };
@@ -109,10 +113,10 @@ Player.prototype.reset = function() {
 
 var allEnemies = [];
 
-for (var i = 0; i <= 3; i++) {
-    pushEnemy = new Enemy();
-    allEnemies.push(pushEnemy);
-}
+  for (var i = 0; i <= 3; i++) {
+      var pushEnemy = new Enemy();
+      allEnemies.push(pushEnemy);
+  }
 var player = new Player();
 
 // This listens for key presses and sends the keys to your
